@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="myForm">
+        <label for="name">Nombre: </label>
+        <input type="text" name="name" id="name" required>
+        <br>
+        <label for="email">Email: </label>
+        <input type="email" name="email" id="email" required>
+        <br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <h2>Datos del formulario: </h2>
+    <p id="formData"></p>
+
+    <script>
+        const listas = [];
+
+        document.getElementById('myForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Evita el envío del formulario
+
+            // Obtiene los valores de los campos del formulario
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            enviar(name, email);
+        });
+
+        function enviar(name, email) {
+            // Crea el texto a mostrar
+            listas.push(`Nombre: ${name} Correo: ${email}`);
+
+            // Actualizamos la lista en el HTML
+            const formulario = document.getElementById('formData');
+            formulario.innerHTML = ''; // Limpia la lista existente
+
+            listas.forEach(item => {
+                const li = document.createElement('p'); // Crea un elemento de lista
+                li.textContent = item; // Asigna el texto al elemento
+                formulario.appendChild(li); // Añade el elemento a la lista
+            });
+
+            // Limpia los campos del formulario
+            document.getElementById('myForm').reset();
+        }
+    </script>
+</body>
+
+</html>
